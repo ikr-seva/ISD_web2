@@ -2,7 +2,7 @@ export interface Resource {
   id: string;
   title: string;
   description: string;
-  category: "debate-principles" | "critical-thinking" | "communication" | "academic-writing" | "research";
+  category: "debate-principles" | "critical-thinking" | "communication";
   content: string;
   readTime: string;
   author: string;
@@ -51,26 +51,6 @@ export const mockResources: Resource[] = [
     readTime: "6 min read",
     author: "Dr. Emily Chen",
     date: "2026-02-08"
-  },
-  {
-    id: "4",
-    title: "Research Methods for Debate Preparation",
-    description: "Strategies for finding credible sources and organizing research effectively.",
-    category: "research",
-    content: "Thorough research forms the foundation of strong arguments. Begin by identifying...",
-    readTime: "12 min read",
-    author: "Dr. Michael Brown",
-    date: "2026-02-05"
-  },
-  {
-    id: "5",
-    title: "Structuring Written Arguments",
-    description: "Techniques for organizing ideas clearly in academic writing and position papers.",
-    category: "academic-writing",
-    content: "Written arguments require careful organization and clarity. Start with a thesis statement...",
-    readTime: "9 min read",
-    author: "Prof. Anna Williams",
-    date: "2026-02-01"
   },
   {
     id: "6",
@@ -176,7 +156,5 @@ export const mockDiscussions: Discussion[] = [
 export const resourceCategories = [
   { id: "debate-principles", name: "Debate Principles", description: "Fundamental concepts and formats" },
   { id: "critical-thinking", name: "Critical Thinking", description: "Logic, reasoning, and analysis" },
-  { id: "communication", name: "Communication Skills", description: "Speaking, listening, and presentation" },
-  { id: "academic-writing", name: "Academic Writing", description: "Structuring arguments in writing" },
-  { id: "research", name: "Research Methods", description: "Finding and evaluating sources" }
+  { id: "communication", name: "Communication Skills", description: "Speaking, listening, and presentation" }
 ];
