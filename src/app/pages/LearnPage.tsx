@@ -1,11 +1,13 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
-import { BookOpen, MessageSquare, Users, Clock, Eye, ArrowRight, Lightbulb, Search, FileText } from "lucide-react";
+import { BookOpen, MessageSquare, Users, Clock, Eye, ArrowRight, Lightbulb, Search, FileText, ChevronDown } from "lucide-react";
 import { mockResources, mockDiscussions, resourceCategories } from "../lib/learn-data";
 
 export function LearnPage() {
+  const [expandedResource, setExpandedResource] = useState<string | null>(null);
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -100,6 +102,7 @@ export function LearnPage() {
             <div className="space-y-4">
               {mockResources.map((resource) => {
                 const category = resourceCategories.find(c => c.id === resource.category);
+                const isExpanded = expandedResource === resource.id;
                 return (
                   <Card 
                     key={resource.id}
@@ -137,12 +140,23 @@ export function LearnPage() {
                           variant="outline" 
                           size="sm"
                           className="gap-2 border-[#1a3a52]/20 hover:bg-[#f7f5f0] shrink-0"
+                          onClick={() => setExpandedResource(isExpanded ? null : resource.id)}
                         >
-                          Read
-                          <ArrowRight className="size-3" />
+                          {isExpanded ? 'Close' : 'Read'}
+                          <ChevronDown className={`size-3 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
                         </Button>
                       </div>
                     </CardHeader>
+                    
+                    {isExpanded && (
+                      <CardContent className="pt-0">
+                        <div className="border-t border-gray-200/60 pt-6">
+                          <div className="prose prose-sm max-w-none whitespace-pre-wrap text-gray-700 leading-relaxed">
+                            {resource.content}
+                          </div>
+                        </div>
+                      </CardContent>
+                    )}
                   </Card>
                 );
               })}
