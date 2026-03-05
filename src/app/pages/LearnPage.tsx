@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
@@ -8,6 +7,11 @@ import { mockResources, mockDiscussions, resourceCategories } from "../lib/learn
 
 export function LearnPage() {
   const [expandedResource, setExpandedResource] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const filteredResources = selectedCategory
+    ? mockResources.filter(r => r.category === selectedCategory)
+    : mockResources;
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -77,11 +81,30 @@ export function LearnPage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
+            <div className="grid md:grid-cols-4 lg:grid-cols-5 gap-4 mb-12">
+              {/* include an "All" button */}
+              <Card
+                key="all"
+                onClick={() => setSelectedCategory(null)}
+                className={`hover:shadow-md transition-smooth cursor-pointer border-gray-200/60 ${selectedCategory === null ? 'border-[#1a3a52] bg-[#e0f2f1]' : ''}`}
+              >
+                <CardHeader className="space-y-2 pb-4">
+                  <div className="bg-[#f7f5f0] w-10 h-10 rounded-lg flex items-center justify-center">
+                    <FileText className="size-5 text-[#1a3a52]" />
+                  </div>
+                  <CardTitle className="text-base leading-snug">
+                    All
+                  </CardTitle>
+                  <CardDescription className="text-xs leading-relaxed">
+                    Show all resources
+                  </CardDescription>
+                </CardHeader>
+              </Card>
               {resourceCategories.map((category) => (
                 <Card 
                   key={category.id}
-                  className="hover:shadow-md transition-smooth cursor-pointer border-gray-200/60"
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`hover:shadow-md transition-smooth cursor-pointer border-gray-200/60 ${selectedCategory === category.id ? 'border-[#1a3a52] bg-[#e0f2f1]' : ''}`}
                 >
                   <CardHeader className="space-y-2 pb-4">
                     <div className="bg-[#f7f5f0] w-10 h-10 rounded-lg flex items-center justify-center">
@@ -100,14 +123,16 @@ export function LearnPage() {
 
             {/* Resource Articles */}
             <div className="space-y-4">
-              {mockResources.map((resource) => {
+              {filteredResources.length === 0 && (
+                <p className="text-center text-gray-500 py-8">No resources found for this category.</p>
+              )}
+              {filteredResources.map((resource) => {
                 const category = resourceCategories.find(c => c.id === resource.category);
                 const isExpanded = expandedResource === resource.id;
                 return (
                   <Card 
                     key={resource.id}
-                    className="hover:shadow-md transition-smooth border-gray-200/60"
-                  >
+                    className="hover:shadow-md transition-smooth border-gray-200/60">
                     <CardHeader>
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1">
