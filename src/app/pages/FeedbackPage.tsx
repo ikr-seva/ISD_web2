@@ -5,6 +5,7 @@ import { Textarea } from "../components/ui/textarea";
 import { Label } from "../components/ui/label";
 import { MessageSquare, Lightbulb, Monitor, FileText, Send } from "lucide-react";
 import { toast } from "sonner";
+import emailjs from '@emailjs/browser';
 
 export function FeedbackPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -38,18 +39,38 @@ export function FeedbackPage() {
     }
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedCategory || !feedbackText.trim()) {
       toast.error("Please select a category and provide feedback");
       return;
     }
-    
-    // Mock submission
-    toast.success("Thank you for your feedback! We'll review it carefully.");
-    setFeedbackText("");
-    setName("");
-    setSelectedCategory("");
+
+    try {
+      // EmailJS configuration - Replace with your actual service ID, template ID, and public key
+      // Sign up at https://www.emailjs.com/ and create a service, template, and get your public key
+      // Template should include: {{from_name}}, {{category}}, {{message}}, {{to_email}}
+      const serviceId = 'your_service_id'; // Replace with your EmailJS service ID
+      const templateId = 'your_template_id'; // Replace with your EmailJS template ID
+      const publicKey = 'your_public_key'; // Replace with your EmailJS public key
+
+      const templateParams = {
+        from_name: name || 'Anonymous',
+        category: categories.find(cat => cat.id === selectedCategory)?.name || selectedCategory,
+        message: feedbackText,
+        to_email: 'familyikromovs@gmail.com',
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+      toast.success("Thank you for your feedback! Your message has been sent.");
+      setFeedbackText("");
+      setName("");
+      setSelectedCategory("");
+    } catch (error) {
+      console.error('Email send error:', error);
+      toast.error("Failed to send feedback. Please try again later.");
+    }
   };
 
   return (
