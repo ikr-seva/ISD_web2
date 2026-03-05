@@ -50,9 +50,9 @@ export function FeedbackPage() {
       // EmailJS configuration - Replace with your actual service ID, template ID, and public key
       // Sign up at https://www.emailjs.com/ and create a service, template, and get your public key
       // Template should include: {{from_name}}, {{category}}, {{message}}, {{to_email}}
-      const serviceId = 'your_service_id'; // Replace with your EmailJS service ID
-      const templateId = 'your_template_id'; // Replace with your EmailJS template ID
-      const publicKey = 'your_public_key'; // Replace with your EmailJS public key
+      const serviceId = 'service_088petc'; // Replace with your EmailJS service ID
+      const templateId = 'template_lz7rk1g'; // Replace with your EmailJS template ID
+      const publicKey = 'scVtrZNBqeZLd98Vm'; // Replace with your EmailJS public key
 
       const templateParams = {
         from_name: name || 'Anonymous',
