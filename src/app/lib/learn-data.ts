@@ -72,16 +72,6 @@ export const mockResources: Resource[] = [
     readTime: "15 min read",
     author: "Fayzullayeva Nigina",
     date: "2026-01-25"
-  },
-  {
-    id: "8",
-    title: "Cross-Examination Techniques",
-    description: "Asking effective questions and responding thoughtfully during debate rounds.",
-    category: "debate-principles",
-    content: "Cross-examination is a critical phase where participants can clarify points and challenge...",
-    readTime: "11 min read",
-    author: "Prof. David Martinez",
-    date: "2026-01-20"
   }
 ];
 
