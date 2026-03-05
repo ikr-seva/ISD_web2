@@ -59,8 +59,8 @@ export const mockSchools: School[] = [
   {
     id: "1",
     name: "Asia School",
-    location: "Djizakh",
-    studentsCount: 1450,
+    location: "Jizzakh",
+    studentsCount: 6,
     contactStatus: "contacted"
   }
 ];
