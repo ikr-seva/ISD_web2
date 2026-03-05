@@ -69,7 +69,7 @@ export function Layout() {
                   <MessageSquare className="size-5" />
                 </div>
                 <span className="font-serif text-lg font-semibold text-[#1a3a52]">
-                  DebateHub
+                  ISD Initiative
                 </span>
               </div>
               <p className="text-sm text-gray-600 leading-relaxed">
