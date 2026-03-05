@@ -1,12 +1,87 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
-import { Search, Users, MapPin, CheckCircle, Circle, Clock } from "lucide-react";
+import { Textarea } from "../components/ui/textarea";
+import { Search, Users, MapPin, CheckCircle, Circle, Clock, Mail, Send } from "lucide-react";
+import { toast } from "sonner";
+import emailjs from '@emailjs/browser';
 import { mockSchools } from "../lib/data";
 
 export function SchoolsPage() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [collaborationForm, setCollaborationForm] = useState({
+    name: "",
+    email: "",
+    school: "",
+    subject: "",
+    requirements: "",
+  });
+  const [submittedCollaboration, setSubmittedCollaboration] = useState(false);
+
+  const handleCollaborationSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validate form
+    if (!collaborationForm.name || !collaborationForm.email || !collaborationForm.subject || !collaborationForm.requirements) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
+    try {
+      // EmailJS configuration
+      const serviceId = 'service_088petc';
+      const templateId = 'template_lz7rk1g';
+      const publicKey = 'scVtrZNBqeZLd98Vm';
+
+      const templateParams = {
+        from_name: collaborationForm.name,
+        category: 'School Collaboration',
+        message: `
+Subject: ${collaborationForm.subject}
+
+School/Organization: ${collaborationForm.school}
+
+Requirements:
+${collaborationForm.requirements}
+
+Sender Email: ${collaborationForm.email}
+        `,
+        to_email: 'familyikromovs@gmail.com',
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+      toast.success("Thank you! Your collaboration offer has been sent successfully.");
+      setSubmittedCollaboration(true);
+      
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setCollaborationForm({
+          name: "",
+          email: "",
+          school: "",
+          subject: "",
+          requirements: "",
+        });
+        setSubmittedCollaboration(false);
+      }, 3000);
+    } catch (error) {
+      console.error('Email send error:', error);
+      toast.error("Failed to send collaboration offer. Please try again later.");
+    }
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setCollaborationForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const filteredSchools = mockSchools.filter((school) => 
     school.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -171,19 +246,120 @@ export function SchoolsPage() {
         </div>
       </section>
 
-      {/* Information Banner */}
-      <section className="py-16 bg-[#fafaf8] border-t border-gray-200/60">
+      {/* Open to Collaboration Section */}
+      <section className="py-16 bg-gradient-to-b from-white to-[#fafaf8] border-t border-gray-200/60">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="bg-white border border-gray-200/60 rounded-xl p-8">
-              <h3 className="text-2xl mb-4 text-[#1e3a5f]">Open to Collaboration</h3>
-              <p className="text-gray-600 leading-relaxed mb-4">
-                The ISD Initiative welcomes public schools within our city interested in academic dialogue, critical thinking, and structured communication. This city-based model allows for accessible participation, equal representation, and strengthened academic cooperation within the community.
-              </p>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                The initiative prioritizes educational development over competition. There are no leaderboards or rankings—all schools contribute equally to the academic community. The project aims to gradually expand participation while maintaining organization, fairness, and academic standards.
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200/60 rounded-full mb-6">
+                <Mail className="size-4 text-[#1a3a52]" />
+                <span className="text-sm text-gray-600">Partnership Opportunities</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl mb-4">Open to Collaboration</h2>
+              <p className="text-gray-600 text-lg leading-relaxed">
+                We welcome public schools interested in academic dialogue, critical thinking, and structured communication. Share your collaboration ideas and requirements with us.
               </p>
             </div>
+
+            <Card className="border-gray-200/60 shadow-lg">
+              <CardContent className="pt-8">
+                <form onSubmit={handleCollaborationSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label htmlFor="name" className="block text-sm font-medium text-[#1a3a52]">
+                        Full Name <span className="text-red-500">*</span>
+                      </label>
+                      <Input
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Your name"
+                        value={collaborationForm.name}
+                        onChange={handleInputChange}
+                        required
+                        className="border-gray-200/60 focus:border-[#1a3a52] focus:ring-[#1a3a52]/10"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label htmlFor="email" className="block text-sm font-medium text-[#1a3a52]">
+                        Email Address <span className="text-red-500">*</span>
+                      </label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="your.email@example.com"
+                        value={collaborationForm.email}
+                        onChange={handleInputChange}
+                        required
+                        className="border-gray-200/60 focus:border-[#1a3a52] focus:ring-[#1a3a52]/10"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="school" className="block text-sm font-medium text-[#1a3a52]">
+                      School/Organization
+                    </label>
+                    <Input
+                      id="school"
+                      name="school"
+                      type="text"
+                      placeholder="Your school or organization name"
+                      value={collaborationForm.school}
+                      onChange={handleInputChange}
+                      className="border-gray-200/60 focus:border-[#1a3a52] focus:ring-[#1a3a52]/10"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="subject" className="block text-sm font-medium text-[#1a3a52]">
+                      Collaboration Subject <span className="text-red-500">*</span>
+                    </label>
+                    <Input
+                      id="subject"
+                      name="subject"
+                      type="text"
+                      placeholder="e.g., Resource Development, Partnership Program, Content Creation"
+                      value={collaborationForm.subject}
+                      onChange={handleInputChange}
+                      required
+                      className="border-gray-200/60 focus:border-[#1a3a52] focus:ring-[#1a3a52]/10"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="requirements" className="block text-sm font-medium text-[#1a3a52]">
+                      Collaboration Requirements <span className="text-red-500">*</span>
+                    </label>
+                    <Textarea
+                      id="requirements"
+                      name="requirements"
+                      placeholder="Please describe your collaboration proposal and specific requirements. Include details about what you're looking for, timeline, scope, and any other relevant information..."
+                      value={collaborationForm.requirements}
+                      onChange={handleInputChange}
+                      required
+                      className="border-gray-200/60 focus:border-[#1a3a52] focus:ring-[#1a3a52]/10 min-h-32 resize-none"
+                    />
+                  </div>
+
+                  <div className="flex gap-3 items-center">
+                    <Button
+                      type="submit"
+                      className="gap-2 bg-[#1a3a52] hover:bg-[#2d5a3d]"
+                      disabled={submittedCollaboration}
+                    >
+                      <Send className="size-4" />
+                      {submittedCollaboration ? "Message Sent!" : "Send Collaboration Offer"}
+                    </Button>
+                    <p className="text-xs text-gray-500">
+                      We'll review your proposal and get back to you as soon as possible.
+                    </p>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
