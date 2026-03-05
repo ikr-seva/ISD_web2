@@ -54,14 +54,15 @@ export const mockResources: Resource[] = [
   },
   {
     id: "6",
-    title: "Identifying Logical Fallacies",
-    description: "Common errors in reasoning and how to recognize them in arguments.",
+    title: "Critical Thinking: A Literature Review",
+    description: "Overview of definitions, development, teaching, and assessment of critical thinking.",
     category: "critical-thinking",
-    content: "Logical fallacies are flaws in reasoning that weaken arguments. Common examples include...",
-    readTime: "7 min read",
-    author: "Dr. Robert Taylor",
+    content: "Abstract\nCritical thinking includes the component skills of analyzing arguments, making inferences using inductive or deductive reasoning, judging or evaluating, and making decisions or solving problems. Background knowledge is a necessary but not a sufficient condition for enabling critical thought within a given subject. Critical thinking involves both cognitive skills and dispositions. These dispositions, which can be seen as attitudes or habits of mind, include open- and fair-mindedness, inquisitiveness, flexibility, a propensity to seek reason, a desire to be well-informed, and a respect for and willingness to entertain diverse viewpoints. There are both general- and domain-specific aspects of critical thinking. Empirical research suggests that people begin developing critical thinking competencies at a very young age. Although adults often exhibit deficient reasoning, in theory all people can be taught to think critically. Instructors are urged to provide explicit instruction in critical thinking, to teach how to transfer to new contexts, and to use cooperative or collaborative learning methods and constructivist approaches that place students at the center of the learning process. In constructing assessments of critical thinking, educators should use open-ended tasks, real-world or “authentic” problem contexts, and ill-structured problems that require students to go beyond recalling or restating previously learned information. Such tasks should have more than one defensible solution and embed adequate collateral materials to support multiple perspectives. Finally, such assessment tasks should make student reasoning visible by requiring students to provide evidence or logical arguments in support of judgments, choices, claims, or assertions.\n\nKeywords: critical thinking, reasoning, problem solving. Educators have long been aware of the importance of critical thinking skills as an outcome of student learning. More recently, the Partnership for 21st Century Skills has identified critical thinking as one of several learning and innovation skills necessary to prepare students for post-secondary education and the workforce. In addition, the newly created Common Core State Standards reflect critical thinking as a cross-disciplinary skill vital for college and employment. Despite widespread recognition of its importance, there is a notable lack of consensus regarding the definition of critical thinking. The purposes of this literature review are to (a) explore the ways in which critical thinking has been defined by researchers, (b) investigate how critical thinking develops (c) learn how teachers can encourage the development of critical thinking skills in their students, and (d) review best practices in assessing critical thinking skills.\n\nDefinition of Critical Thinking\nTheoretical Background\n The literature on critical thinking has roots in two primary academic disciplines: philosophy and psychology (Lewis & Smith, 1993). Sternberg (1986) has also noted a third critical thinking strand within the field of education. These separate academic strands have developed different approaches to defining critical thinking that reflect their respective concerns. Each of these approaches is explored more fully below.",
+    readTime: "20 min read",
+    author: "Unknown",
     date: "2026-01-28"
   },
+
   {
     id: "7",
     title: "The Importance of Speaking to Learn the Language",
