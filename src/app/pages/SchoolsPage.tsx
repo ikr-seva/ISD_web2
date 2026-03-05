@@ -147,7 +147,7 @@ export function SchoolsPage() {
                               <p className="font-semibold text-[#1e3a5f]">
                                 {school.studentsCount.toLocaleString()}
                               </p>
-                              <p className="text-xs text-gray-600">Students</p>
+                              <p className="text-xs text-gray-600">Participating Students</p>
                             </div>
                           </div>
 
