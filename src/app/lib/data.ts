@@ -58,44 +58,9 @@ export const mockReflections: Record<string, Reflection[]> = {};
 export const mockSchools: School[] = [
   {
     id: "1",
-    name: "Central City High School",
-    location: "Downtown District",
+    name: "Asia School",
+    location: "Djizakh",
     studentsCount: 1450,
     contactStatus: "contacted"
-  },
-  {
-    id: "2",
-    name: "Northside Academy",
-    location: "North District",
-    studentsCount: 1200,
-    contactStatus: "identified"
-  },
-  {
-    id: "3",
-    name: "Riverside Public School",
-    location: "East District",
-    studentsCount: 980,
-    contactStatus: "contacted"
-  },
-  {
-    id: "4",
-    name: "Westgate Secondary",
-    location: "West District",
-    studentsCount: 1100,
-    contactStatus: "identified"
-  },
-  {
-    id: "5",
-    name: "Southpoint High School",
-    location: "South District",
-    studentsCount: 1350,
-    contactStatus: "contacted"
-  },
-  {
-    id: "6",
-    name: "Lakeside Public School",
-    location: "Central District",
-    studentsCount: 890,
-    contactStatus: "identified"
   }
 ];
