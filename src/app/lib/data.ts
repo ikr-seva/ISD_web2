@@ -38,6 +38,8 @@ export interface School {
   location: string;
   studentsCount: number;
   contactStatus: "identified" | "contacted" | "participating";
+  eventDate?: string;
+  eventTime?: string;
 }
 
 export interface Feedback {
@@ -61,6 +63,8 @@ export const mockSchools: School[] = [
     name: "Asia School",
     location: "Jizzakh",
     studentsCount: 6,
-    contactStatus: "contacted"
+    contactStatus: "contacted",
+    eventDate: "14.03.2026",
+    eventTime: "13.00"
   }
 ];
