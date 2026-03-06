@@ -1,10 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { ArrowRight, MessageSquare, Users, BookOpen, Award, Lightbulb, Target, Shield } from "lucide-react";
 
 export function HomePage() {
+  const navigate = useNavigate();
+
+  const handleFeedbackClick = () => {
+    navigate('/feedback');
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -340,12 +347,14 @@ export function HomePage() {
               Whether you're a student, teacher, or school administrator, the ISD Initiative welcomes your participation in building a strong foundation for structured debate and intellectual growth.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link to="/feedback">
-                <Button size="lg" className="gap-2 px-8 py-6 bg-[#1e3a5f] hover:bg-[#2d5270]">
-                  Share Feedback
-                  <ArrowRight className="size-4" />
-                </Button>
-              </Link>
+              <Button 
+                size="lg" 
+                className="gap-2 px-8 py-6 bg-[#1e3a5f] hover:bg-[#2d5270]"
+                onClick={handleFeedbackClick}
+              >
+                Share Feedback
+                <ArrowRight className="size-4" />
+              </Button>
               <Link to="/learn">
                 <Button 
                   size="lg" 
