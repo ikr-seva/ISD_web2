@@ -4,7 +4,7 @@ import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
-import { Search, Users, MapPin, CheckCircle, Circle, Clock, Mail, Send } from "lucide-react";
+import { Search, Users, MapPin, CheckCircle, Circle, Clock, Mail, Send, Calendar } from "lucide-react";
 import { toast } from "sonner";
 import emailjs from '@emailjs/browser';
 import { mockSchools } from "../lib/data";
@@ -212,6 +212,12 @@ Sender Email: ${collaborationForm.email}
                             <MapPin className="size-4" />
                             <span>{school.location}</span>
                           </div>
+                          {school.eventDate && school.eventTime && (
+                            <div className="flex items-center gap-2 text-sm text-gray-600 mt-1">
+                              <Calendar className="size-4" />
+                              <span>{school.eventDate} at {school.eventTime}</span>
+                            </div>
+                          )}
                         </div>
                       </CardHeader>
                       <CardContent>
