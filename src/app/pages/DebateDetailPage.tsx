@@ -14,7 +14,8 @@ import {
   MessageSquare,
   Lightbulb,
   HelpCircle,
-  Eye
+  Eye,
+  Zap
 } from "lucide-react";
 import { mockDebateEvents, mockReflections } from "../lib/data";
 import { toast } from "sonner";
@@ -68,16 +69,28 @@ export function DebateDetailPage() {
 
   return (
     <div className="flex flex-col bg-white">
-      {/* Header */}
-      <section className="py-8 bg-[#fafaf8] border-b border-gray-200/60">
+      {/* Hero Section */}
+      <section className="py-20 bg-gradient-to-b from-[#fafaf8] to-white border-b border-gray-200/60">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <Link to="/debates">
-              <Button variant="ghost" className="gap-2 mb-6 hover:bg-white">
+          <div className="max-w-4xl mx-auto text-center">
+            <Link to="/debates" className="inline-block mb-6">
+              <Button variant="ghost" className="gap-2 hover:bg-white">
                 <ArrowLeft className="size-4" />
                 Back to Event Archive
               </Button>
             </Link>
+            
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-[#f7f5f0] rounded-2xl mb-6">
+              <Zap className="size-8 text-[#1a3a52]" />
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl mb-6">
+              Debate Event Details
+            </h1>
+            
+            <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+              Review the event details and contribute your reflections to this debate discussion.
+            </p>
           </div>
         </div>
       </section>
