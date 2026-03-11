@@ -6,7 +6,7 @@ import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
 import { Label } from "../components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Lightbulb } from "lucide-react";
 import { toast } from "sonner";
 import { mockSchools } from "../lib/data";
 
@@ -47,21 +47,43 @@ export function CreateDebatePage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-3xl">
-      <Link to="/debates">
-        <Button variant="ghost" className="gap-2 mb-6">
-          <ArrowLeft className="size-4" />
-          Back to Debates
-        </Button>
-      </Link>
+    <div className="flex flex-col">
+      {/* Hero Section */}
+      <section className="py-20 bg-gradient-to-b from-[#fafaf8] to-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-[#f7f5f0] rounded-2xl mb-6">
+              <Lightbulb className="size-8 text-[#1a3a52]" />
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl mb-6">
+              Create a New Debate
+            </h1>
+            
+            <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+              Start a debate between two schools on a topic you're passionate about. Fill in the details below to organize a structured discussion.
+            </p>
+          </div>
+        </div>
+      </section>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-3xl">Create a New Debate</CardTitle>
-          <CardDescription>
-            Start a debate between two schools on a topic you're passionate about
-          </CardDescription>
-        </CardHeader>
+      {/* Form Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <Link to="/debates">
+            <Button variant="ghost" className="gap-2 mb-6">
+              <ArrowLeft className="size-4" />
+              Back to Debates
+            </Button>
+          </Link>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-2xl">Debate Details</CardTitle>
+              <CardDescription>
+                Complete all fields to create your debate
+              </CardDescription>
+            </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
@@ -183,8 +205,10 @@ export function CreateDebatePage() {
               </Button>
             </div>
           </form>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+        </div>
+      </section>
     </div>
   );
 }
