@@ -65,6 +65,6 @@ export const mockSchools: School[] = [
     studentsCount: 6,
     contactStatus: "contacted",
     eventDate: "14.03.2026",
-    eventTime: "13.00"
+    eventTime: "10.00"
   }
 ];
