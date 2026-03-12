@@ -4,7 +4,32 @@
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Untitled</title>
+      <!-- Favicon for light mode -->
+      <link rel="icon" type="image/svg+xml" href="./light.png" media="(prefers-color-scheme: light)">
+      <!-- Favicon for dark mode -->
+      <link rel="icon" type="image/svg+xml" href="./dark.png" media="(prefers-color-scheme: dark)">
+      <!-- Fallback favicon -->
+      <link rel="icon" type="image/png" href="./19_01.png">
+      <title>ISD</title>
+      <script>
+        // Update favicon based on system preference
+        function updateFavicon() {
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const favicon = document.querySelector('link[rel="icon"]');
+          
+          if (prefersDark) {
+            favicon.href = './dark.png';
+          } else {
+            favicon.href = './ligth.png';
+          }
+        }
+        
+        // Update on page load
+        updateFavicon();
+        
+        // Update when system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addListener(updateFavicon);
+      </script>
     </head>
 
     <body>
