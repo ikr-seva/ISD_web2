@@ -1,9 +1,15 @@
+import { useEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import { MessageSquare, BookOpen, School, Lightbulb, MessageCircle } from "lucide-react";
 
 export function Layout() {
   const location = useLocation();
+  
+  // Scroll to top when route changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
   
   const navItems = [
     { path: "/", label: "Home", icon: MessageSquare },
